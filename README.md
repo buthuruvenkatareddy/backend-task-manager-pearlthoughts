@@ -13,8 +13,9 @@
 
 ## Candidate Information
 
-Name: Venkat Reddy Buthuru
-E-mail: buthuruvenkatreddy@gmail.com
+Name: Venkat Reddy Buthuru, 
+E-mail: buthuruvenkatreddy@gmail.com,
+
 
 ---
 
@@ -24,15 +25,15 @@ A production-ready offline-first task management API that enables users to creat
 
 ### Key Features
 
-Offline-First Architecture - Full functionality without internet  
-Intelligent Sync Queue - Automatic operation queuing and batch processing  
-Conflict Resolution - Last-write-wins with timestamp comparison  
-Soft Deletes - Data integrity with recoverable deletes  
-Batch Sync - Efficient 50-item batch processing  
-RESTful API - 8 well-structured endpoints  
-Modern UI - Beautiful responsive frontend with real-time updates  
-Type-Safe - Full TypeScript implementation  
-Well-Tested - 17/17 tests passing (100% success rate)  
+1. Offline-First Architecture - Full functionality without internet  
+2. Intelligent Sync Queue - Automatic operation queuing and batch processing  
+3. Conflict Resolution - Last-write-wins with timestamp comparison  
+4. Soft Deletes - Data integrity with recoverable deletes  
+5. Batch Sync - Efficient 50-item batch processing  
+6. RESTful API - 8 well-structured endpoints  
+7. Modern UI - Beautiful responsive frontend with real-time updates  
+8. Type-Safe - Full TypeScript implementation  
+9. Well-Tested - 17/17 tests passing (100% success rate)  
 
 ---
 
@@ -58,12 +59,6 @@ cp .env.example .env
 # Run development server
 npm run dev
 ```
-
-Access the application:
-- Frontend: http://localhost:3000
-- API: http://localhost:3000/api
-
----
 
 
 ## Architecture
@@ -291,40 +286,6 @@ npm run format      # Format code with Prettier
 npm run typecheck   # Validate TypeScript types
 ```
 
----
-
-## Key Implementation Highlights
-
-### 1. Offline-First Design
-- All operations work locally first
-- Network independence ensures reliability
-- Seamless sync when connectivity returns
-
-### 2. Intelligent Sync Queue
-- Operations queued with metadata
-- Batch processing for efficiency
-- Retry logic with exponential backoff
-- Dead letter queue after 3 failures
-
-### 3. Conflict Resolution
-- Timestamp-based comparison
-- Last-write-wins strategy
-- Operation priority (delete > update > create)
-- Logged decisions for debugging
-
-### 4. Error Handling
-- Global error middleware
-- Try-catch in all async operations
-- Meaningful error messages
-- Graceful degradation
-
-### 5. Type Safety
-- Full TypeScript implementation
-- Interfaces for all data structures
-- Type guards where needed
-- No `any` types used
-
----
 
 ## License
 
@@ -334,6 +295,6 @@ This project was created as part of the Backend Developer Internship selection p
 
 ## Author
 
-**Venkat Reddy Buthuru**  
+Venkat Reddy Buthuru  
 
-**Thank you for reviewing my submission!**
+Thank you for reviewing my submission!
