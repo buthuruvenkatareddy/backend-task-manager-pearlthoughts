@@ -26,6 +26,11 @@ const db = new Database(process.env.DATABASE_URL || './data/tasks.sqlite3');
 app.use('/api/tasks', createTaskRouter(db));
 app.use('/api', createSyncRouter(db));
 
+// Health check at root for Railway
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() });
+});
+
 // Serve index.html for root path
 app.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
