@@ -10,7 +10,7 @@ import { errorHandler } from './middleware/errorHandler';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || '3000', 10);
 
 // Middleware
 app.use(cors());
@@ -40,7 +40,7 @@ async function start() {
     await db.initialize();
     console.log('Database initialized');
     
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on port ${PORT}`);
       console.log(`Frontend: http://localhost:${PORT}`);
       console.log(`API: http://localhost:${PORT}/api`);
