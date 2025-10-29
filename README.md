@@ -13,9 +13,8 @@
 
 ## Candidate Information
 
-Name: Venkat Reddy Buthuru, 
-E-mail: buthuruvenkatreddy@gmail.com,
-
+Name: Venkat Reddy Buthuru  
+E-mail: <buthuruvenkatreddy@gmail.com>
 
 ---
 
@@ -25,21 +24,22 @@ A production-ready offline-first task management API that enables users to creat
 
 ### Key Features
 
-1. Offline-First Architecture - Full functionality without internet  
-2. Intelligent Sync Queue - Automatic operation queuing and batch processing  
-3. Conflict Resolution - Last-write-wins with timestamp comparison  
-4. Soft Deletes - Data integrity with recoverable deletes  
-5. Batch Sync - Efficient 50-item batch processing  
-6. RESTful API - 8 well-structured endpoints  
-7. Modern UI - Beautiful responsive frontend with real-time updates  
-8. Type-Safe - Full TypeScript implementation  
-9. Well-Tested - 17/17 tests passing (100% success rate)  
+- Offline-First Architecture - Full functionality without internet
+- Intelligent Sync Queue - Automatic operation queuing and batch processing
+- Conflict Resolution - Last-write-wins with timestamp comparison
+- Soft Deletes - Data integrity with recoverable deletes
+- Batch Sync - Efficient 50-item batch processing
+- RESTful API - 8 well-structured endpoints
+- Modern UI - Beautiful responsive frontend with real-time updates
+- Type-Safe - Full TypeScript implementation
+- Well-Tested - 17/17 tests passing (100% success rate)
 
 ---
 
-##  Quick Start
+## Quick Start
 
 ### Prerequisites
+
 - Node.js v18 or higher
 - npm or yarn
 
@@ -60,12 +60,18 @@ cp .env.example .env
 npm run dev
 ```
 
+Access the application:
+
+- Frontend: <http://localhost:3000>
+- API: <http://localhost:3000/api>
+
+---
 
 ## Architecture
 
 ### System Design
 
-```
+```text
 ┌─────────────────────────────────────────────────┐
 │           Frontend (HTML/CSS/JS)                │
 │  • Task creation, update, deletion              │
@@ -133,22 +139,19 @@ CREATE TABLE sync_queue (
 
 ---
 
+---
+
 ## How Offline-First Works
 
 ### 1. Offline Task Creation Flow
-```
-User creates task (offline)
-    ↓
-Save to local SQLite database
-    ↓
-Mark task as sync_status: 'pending'
-    ↓
-Add operation to sync_queue
-    ↓
-Task available immediately to user
+
+```text
+
 ```
 
 ### 2. Coming Online & Sync Flow
+
+```text
 ```
 Internet connection detected
     ↓
@@ -167,7 +170,11 @@ Remove from sync_queue
 Update UI with sync status
 ```
 
+```
+
 ### 3. Conflict Resolution (Last-Write-Wins)
+
+```text
 ```
 Local task vs Server task
     ↓
@@ -203,35 +210,8 @@ npm run test:coverage
 ```
 
 ### Test Results
-```
-✓ TaskService: CRUD operations (8 tests)
-  ✓ should create a new task with default values
-  ✓ should add task to sync queue after creation
-  ✓ should update an existing task
-  ✓ should return null for non-existent task
-  ✓ should soft delete a task
-  ✓ should return false for non-existent task on delete
-  ✓ should return only non-deleted tasks
-  ✓ should return tasks with pending or error sync status
 
-✓ SyncService: Queue and sync logic (6 tests)
-  ✓ should add items to sync queue
-  ✓ should process sync batches correctly
-  ✓ should resolve conflicts using last-write-wins
-  ✓ should update sync status after successful sync
-  ✓ should handle sync errors with retry logic
-  ✓ should move to dead letter queue after max retries
-
-✓ Integration: End-to-end flows (3 tests)
-  ✓ should handle complete offline-to-online flow
-  ✓ should sync multiple operations in correct order
-  ✓ should handle concurrent operations correctly
-
-──────────────────────────────────────────────────
-Test Files: 3 passed (3)
-     Tests: 17 passed (17)
-  Duration: 121ms
-```
+```text
 
 ---
 
@@ -286,6 +266,45 @@ npm run format      # Format code with Prettier
 npm run typecheck   # Validate TypeScript types
 ```
 
+---
+
+## Key Implementation Highlights
+
+### 1. Offline-First Design
+
+- All operations work locally first
+- Network independence ensures reliability
+- Seamless sync when connectivity returns
+
+### 2. Intelligent Sync Queue
+
+- Operations queued with metadata
+- Batch processing for efficiency
+- Retry logic with exponential backoff
+- Dead letter queue after 3 failures
+
+### 3. Conflict Resolution
+
+- Timestamp-based comparison
+- Last-write-wins strategy
+- Operation priority (delete > update > create)
+- Logged decisions for debugging
+
+### 4. Error Handling
+
+- Global error middleware
+- Try-catch in all async operations
+- Meaningful error messages
+- Graceful degradation
+
+### 5. Type Safety
+
+- Full TypeScript implementation
+- Interfaces for all data structures
+- Type guards where needed
+- No `any` types used
+
+---
 
 ## License
 
@@ -295,6 +314,6 @@ This project was created as part of the Backend Developer Internship selection p
 
 ## Author
 
-Venkat Reddy Buthuru  
+**Venkat Reddy Buthuru**  
 
-Thank you for reviewing my submission!
+**Thank you for reviewing my submission!**
