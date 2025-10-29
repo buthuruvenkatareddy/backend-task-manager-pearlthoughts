@@ -18,6 +18,10 @@ E-mail: <buthuruvenkatreddy@gmail.com>
 
 ---
 
+
+DEPLOYMENT LINK: https://task-manager-api-ieoe.onrender.com/
+
+
 ## Project Overview
 
 A production-ready offline-first task management API that enables users to create, update, and manage tasks even without internet connectivity. The system intelligently queues operations and synchronizes them when the connection is restored, with built-in conflict resolution using a last-write-wins strategy.
