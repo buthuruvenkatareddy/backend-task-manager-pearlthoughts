@@ -1,20 +1,18 @@
 import { Router, Request, Response } from 'express';
 import { TaskService } from '../services/taskService';
-import { SyncService } from '../services/syncService';
 import { Database } from '../db/database';
 
 export function createTaskRouter(db: Database): Router {
   const router = Router();
   const taskService = new TaskService(db);
-  const syncService = new SyncService(db, taskService);
 
   // Get all tasks
-  router.get('/', async (req: Request, res: Response) => {
+  router.get('/', async (_req: Request, res: Response) => {
     try {
       const tasks = await taskService.getAllTasks();
-      res.json(tasks);
+      return res.json(tasks);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch tasks' });
+      return res.status(500).json({ error: 'Failed to fetch tasks' });
     }
   });
 
@@ -25,9 +23,9 @@ export function createTaskRouter(db: Database): Router {
       if (!task) {
         return res.status(404).json({ error: 'Task not found' });
       }
-      res.json(task);
+      return res.json(task);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch task' });
+      return res.status(500).json({ error: 'Failed to fetch task' });
     }
   });
 
@@ -41,9 +39,9 @@ export function createTaskRouter(db: Database): Router {
 
       const task = await taskService.createTask(req.body);
       
-      res.status(201).json(task);
+      return res.status(201).json(task);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to create task' });
+      return res.status(500).json({ error: 'Failed to create task' });
     }
   });
 
@@ -56,9 +54,9 @@ export function createTaskRouter(db: Database): Router {
         return res.status(404).json({ error: 'Task not found' });
       }
       
-      res.json(task);
+      return res.json(task);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to update task' });
+      return res.status(500).json({ error: 'Failed to update task' });
     }
   });
 
@@ -71,9 +69,9 @@ export function createTaskRouter(db: Database): Router {
         return res.status(404).json({ error: 'Task not found' });
       }
       
-      res.json({ success: true, message: 'Task deleted successfully' });
+      return res.json({ success: true, message: 'Task deleted successfully' });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to delete task' });
+      return res.status(500).json({ error: 'Failed to delete task' });
     }
   });
 

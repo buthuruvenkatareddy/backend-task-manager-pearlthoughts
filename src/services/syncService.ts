@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import { Task, SyncQueueItem, SyncResult, BatchSyncRequest, BatchSyncResponse, SyncError } from '../types';
+import { Task, SyncQueueItem, SyncResult, BatchSyncRequest, BatchSyncResponse } from '../types';
 import { Database } from '../db/database';
-import { TaskService } from './taskService';
-import { CHALLENGE_CONSTRAINTS } from '../utils/challenge-constraints';
 
 export class SyncService {
   private apiUrl: string;
@@ -12,7 +10,6 @@ export class SyncService {
   
   constructor(
     private db: Database,
-    private taskService: TaskService,
     apiUrl: string = process.env.API_BASE_URL || 'http://localhost:3000/api'
   ) {
     this.apiUrl = apiUrl;
@@ -60,7 +57,7 @@ export class SyncService {
               result.synced_items++;
             } else if (processedItem.status === 'conflict' && processedItem.resolved_data) {
               // Apply resolved conflict data
-              const resolvedTask = await this.resolveConflict(
+              await this.resolveConflict(
                 queueItem.data as Task,
                 processedItem.resolved_data
               );

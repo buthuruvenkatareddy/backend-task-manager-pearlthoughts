@@ -1,15 +1,13 @@
 import { Router, Request, Response } from 'express';
 import { SyncService } from '../services/syncService';
-import { TaskService } from '../services/taskService';
 import { Database } from '../db/database';
 
 export function createSyncRouter(db: Database): Router {
   const router = Router();
-  const taskService = new TaskService(db);
-  const syncService = new SyncService(db, taskService);
+  const syncService = new SyncService(db);
 
   // Trigger manual sync
-  router.post('/sync', async (req: Request, res: Response) => {
+  router.post('/sync', async (_req: Request, res: Response) => {
     try {
       // Check connectivity first
       const isOnline = await syncService.checkConnectivity();
@@ -26,9 +24,9 @@ export function createSyncRouter(db: Database): Router {
       // Call syncService.sync()
       const result = await syncService.sync();
       
-      res.json(result);
+      return res.json(result);
     } catch (error) {
-      res.status(500).json({ 
+      return res.status(500).json({ 
         error: 'Sync failed',
         success: false,
         synced_items: 0,
@@ -38,18 +36,18 @@ export function createSyncRouter(db: Database): Router {
   });
 
   // Check sync status
-  router.get('/status', async (req: Request, res: Response) => {
+  router.get('/status', async (_req: Request, res: Response) => {
     try {
       const status = await syncService.getSyncStatus();
       
-      res.json({
+      return res.json({
         pending_sync_count: status.pending_count,
         last_sync_at: status.last_sync_at,
         is_online: status.is_online,
         status: status.pending_count > 0 ? 'pending' : 'synced'
       });
     } catch (error) {
-      res.status(500).json({ error: 'Failed to get sync status' });
+      return res.status(500).json({ error: 'Failed to get sync status' });
     }
   });
 
@@ -72,17 +70,17 @@ export function createSyncRouter(db: Database): Router {
         resolved_data: item.data
       }));
 
-      res.json({
+      return res.json({
         processed_items: processedItems
       });
     } catch (error) {
-      res.status(500).json({ error: 'Batch sync failed' });
+      return res.status(500).json({ error: 'Batch sync failed' });
     }
   });
 
   // Health check endpoint
-  router.get('/health', async (req: Request, res: Response) => {
-    res.json({ status: 'ok', timestamp: new Date() });
+  router.get('/health', async (_req: Request, res: Response) => {
+    return res.json({ status: 'ok', timestamp: new Date() });
   });
 
   return router;
