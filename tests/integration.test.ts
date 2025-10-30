@@ -12,7 +12,7 @@ describe('Integration Tests', () => {
     db = new Database(':memory:');
     await db.initialize();
     taskService = new TaskService(db);
-    syncService = new SyncService(db, taskService);
+    syncService = new SyncService(db, 'http://localhost:3000/api');
   });
 
   afterEach(async () => {
